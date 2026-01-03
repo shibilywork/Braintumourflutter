@@ -140,7 +140,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
                               ),
                               decoration: BoxDecoration(
                                 color: _statusColor(
-                                  appointment['st+atus'],
+                                  appointment['status'],
                                 ).withOpacity(0.9),
                                 borderRadius: BorderRadius.circular(20),
                               ),

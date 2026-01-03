@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
       {'title': 'View Prescriptions', 'icon': Icons.receipt_long, 'page': const ViewPrescriptions()},
       {'title': 'Submit Complaint', 'icon': Icons.report_problem, 'page': const ComplaintPage()},
       {'title': 'Submit Review', 'icon': Icons.rate_review, 'page': const ReviewPage()},
-      {'title': 'Profile / Register', 'icon': Icons.person, 'page':  RegisterPage()},
+      // {'title': 'Profile / Register', 'icon': Icons.person, 'page':  RegisterPage()},
     ];
 
     return Scaffold(

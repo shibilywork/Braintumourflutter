@@ -1,3 +1,5 @@
+import 'package:braintumor/loginAPI.dart';
+import 'package:braintumor/regAPI.dart';
 import 'package:flutter/material.dart';
 
 class ViewPrescriptions extends StatefulWidget {
@@ -8,32 +10,30 @@ class ViewPrescriptions extends StatefulWidget {
 }
 
 class _ViewPrescriptionsState extends State<ViewPrescriptions> {
-  final List<Map<String, dynamic>> prescriptions = [
-    {
-      'patient': 'Rohan',
-      'prescription': 'Take 2 tablets daily after meals',
-      'medicine': 'Paracetamol',
-      'doctor': 'Dr. Albert',
-    },
-    {
-      'patient': 'Swalih',
-      'prescription': 'Apply ointment twice a day',
-      'medicine': 'Betadine Cream',
-      'doctor': 'Dr. Rohan',
-    },
-    {
-      'patient': 'Razin',
-      'prescription': 'Drink 1 glass of juice daily',
-      'medicine': 'Vitamin C',
-      'doctor': 'Dr. Razin',
-    },
-    {
-      'patient': 'Rinshad',
-      'prescription': 'Take 1 capsule before sleep',
-      'medicine': 'Melatonin',
-      'doctor': 'Dr. Rinshad',
-    },
-  ];
+   List<dynamic> prescriptions = [];
+
+
+  Future<void> fetchPrescriptions() async {
+    try {
+      final response = await dio.get("$baseurl/pres/$lid");
+      print(response.data);
+
+      if (response.statusCode == 200 && response.data is List) {
+        setState(() {
+          prescriptions = response.data;
+        });
+      }
+    } catch (e) {
+      debugPrint("Error loading doctors: $e");
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchPrescriptions();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,10 +109,10 @@ class _ViewPrescriptionsState extends State<ViewPrescriptions> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _infoRow(Icons.person_outline, item['patient']),
+                          // _infoRow(Icons.person_outline, item['patient']),
                           _infoRow(Icons.description_outlined, item['prescription']),
                           _infoRow(Icons.medication, item['medicine']),
-                          _infoRow(Icons.person, item['doctor']),
+                          _infoRow(Icons.person, item['doc_nme']),
                         ],
                       ),
                     );

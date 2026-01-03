@@ -1,3 +1,5 @@
+import 'package:braintumor/loginAPI.dart';
+import 'package:braintumor/regAPI.dart';
 import 'package:flutter/material.dart';
 
 class ViewMedicine extends StatefulWidget {
@@ -8,32 +10,32 @@ class ViewMedicine extends StatefulWidget {
 }
 
 class _ViewMedicineState extends State<ViewMedicine> {
-  final List<Map<String, dynamic>> medicines = [
-    {
-      'medicine': 'Paracetamol',
-      'description': '1 time a day',
-      'quantity': '5 Nos',
-      'price': '50 Rs',
-    },
-    {
-      'medicine': 'Ibuprofen',
-      'description': '2 times a day',
-      'quantity': '10 Nos',
-      'price': '120 Rs',
-    },
-    {
-      'medicine': 'Amoxicillin',
-      'description': '3 times a day',
-      'quantity': '14 Nos',
-      'price': '200 Rs',
-    },
-    {
-      'medicine': 'Vitamin D',
-      'description': 'Once a week',
-      'quantity': '4 Nos',
-      'price': '80 Rs',
-    },
-  ];
+   List<dynamic> medicines = [];
+
+
+
+  Future<void> ViewMedicine() async {
+    try {
+      final response = await dio.get("$baseurl/med");
+      print(response.data);
+
+      if (response.statusCode == 200 && response.data is List) {
+        print(response.data);
+        setState(() {
+          medicines = response.data;
+        });
+      }
+    } catch (e) {
+      debugPrint("Error loading doctors: $e");
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ViewMedicine();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:braintumor/login.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-String baseurl = 'http://192.168.1.96:5000';
+String baseurl = 'http://192.168.1.49:5000';
 final Dio dio = Dio();
 
 Future<String?> registerUser({
